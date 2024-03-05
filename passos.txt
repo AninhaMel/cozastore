@@ -12,3 +12,23 @@ Nuget Gallery
     EntityFrameworkCore.Design
     EntityFrameworkCore.InMemory
     AspNetCore.Identity.EntityFrameworkCore
+
+    Criar as classes de dados - Pasta Models
+    Criar a pasta Data e a classe de Contexto
+    Criar a ConnectionString no arquivo appsettings.json
+    Criar o serviço de conexão no arquivo Program.cs
+
+    Executar no terminal:
+    dotnet tool install --global dotnet-aspnet-codegenerator --version 8.0.1
+
+    Criar um controller - CRUD:
+    dotnet-aspnet-codegenerator controller -name CoresController -m Cor -dc AppDbContext --relativeFolderPath controllers -udl
+
+    Nuget Gallery 
+    Shift +Ctl + P
+    Microsoft.VisualStudio.Web.CodeGeneration.Design
+    Microsoft.EntityFrameworkCore.Tools
+    Microsoft.EntityFrameworkCore.sqlServer
+
+    dotnet-aspnet-codegenerator controller -name CoresController -m Cor -dc AppDbContext --relativeFolderPath controllers -udl
+
