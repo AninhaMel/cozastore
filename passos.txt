@@ -32,3 +32,6 @@ Nuget Gallery
 
     dotnet-aspnet-codegenerator controller -name CoresController -m Cor -dc AppDbContext --relativeFolderPath controllers -udl
 
+    dotnet-aspnet-codegenerator controller -name TamanhosController -m Tamanho -dc AppDbContext --relativeFolderPath controllers -udl
+
+    dotnet-aspnet-codegenerator controller -name CategoriasController -m Categoria -dc AppDbContext --relativeFolderPath controllers -udl
