@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cozastore.Controllers;
+
+[Authorize(Roles = "Adiministrador")]
 
     public class AdminController : Controller
     {
