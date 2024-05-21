@@ -1,4 +1,5 @@
 using System.Net.Mail;
+using System.Security.Claims;
 using Cozastore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,7 @@ public class AccountController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
 
-    public async Task <IActionResult> Login(LoginVM login)
+    public async Task<IActionResult> Login(LoginVM login)
     {
         if (ModelState.IsValid)
         {
@@ -60,26 +61,28 @@ public class AccountController : Controller
                 return LocalRedirect(login.UrlRetorno);
             }
 
-            if(result.IsLockedOut)
+            if (result.IsLockedOut)
             {
                 _logger.LogWarning($"Usuário {userName} está bloqueado");
                 ModelState.AddModelError(string.Empty, "Conta Bloqueada! Aguarde alguns minutos para continuar!");
 
             }
 
-            
+
             ModelState.AddModelError(string.Empty, "Usuário e/ou Senha Inválidos!!!");
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        PublicClientApplication async async Task<IActionResult> Logout()
-        {
-            _logger.LogInformation($"Usuário {ClaimTypes.EMail} saiu do sistema!");
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
+        return View(login);
     }
-   
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
+    {
+        _logger.LogInformation($"Usuário {ClaimTypes.Email} saiu do sistema!");
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
+
     public IActionResult AcessDenied()
     {
         return View();
