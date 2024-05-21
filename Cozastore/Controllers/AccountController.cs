@@ -3,6 +3,7 @@ using Cozastore.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Identity.Client;
 
 
 namespace Cozastore.Controllers;
@@ -68,19 +69,20 @@ public class AccountController : Controller
 
             
             ModelState.AddModelError(string.Empty, "Usuário e/ou Senha Inválidos!!!");
-
-
-
         }
-        return View(login);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        PublicClientApplication async async Task<IActionResult> Logout()
+        {
+            _logger.LogInformation($"Usuário {ClaimTypes.EMail} saiu do sistema!");
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
-
-
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+   
+    public IActionResult AcessDenied()
     {
-        return View("Error!");
+        return View();
     }
 
     private static bool IsValidEmail(string email)
